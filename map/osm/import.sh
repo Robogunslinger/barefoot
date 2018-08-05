@@ -25,7 +25,7 @@ then
 	mode=$6
 elif [ "$#" -eq "0" ]
 then
-	input=/mnt/map/osm/oberbayern.osm.pbf
+	input=/mnt/map/osm/australia-oceania-latest_20180602_osm.pbf
 	database=oberbayern
 	user=osmuser
 	password=pass

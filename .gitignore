@@ -1,16 +1,16 @@
-internal/
-doc/
-target/
-.project
-.pydevproject
-.settings/
-.classpath
+# exclude data
+map/osm/australia-oceania-latest_20180602_osm.pbf
+oberbayern.bfmap
+
+# exclude intellij and git files
+.idea/*
+*.iml
 .DS_Store
-*.osm.pbf
-*.bfmap
-*.pyc
-*.tar.gz
-*.synctex.gz
-*.log
-*.aux
-*~
+test-trace.log
+
+# exclude compiled files
+target/*
+map/tools/*.pyc
+
+# !output/excluded_data/.gitkeep
+
