@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import com.bmwcarit.barefoot.spatial.Geography;
 import com.bmwcarit.barefoot.spatial.SpatialOperator;
 import com.esri.core.geometry.Point;
+import com.esri.core.geometry.Polyline;
 
 /**
  * Point on a {@link Road} defined by a reference to the {@link Road} and a fraction <i>f</i>, with
@@ -64,6 +65,14 @@ public class RoadPoint extends com.bmwcarit.barefoot.topology.Point<Road> {
     public JSONObject toJSON() throws JSONException {
         JSONObject json = edge().toJSON();
         json.put("frac", fraction());
+        json.put("osm", edge().base().refid());
+        json.put("source", edge().base().source());
+        json.put("target", edge().base().target());
+        Polyline line = edge().geometry();
+        Point end = line.getPoint(line.getPointCount() - 1);
+        Point start = line.getPoint(0);
+        json.put("source_coord", start.getY() + " " + start.getX());
+        json.put("target_coord", end.getY() + " " + end.getX());
         return json;
     }
 

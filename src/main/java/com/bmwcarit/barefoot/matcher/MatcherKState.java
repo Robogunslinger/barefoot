@@ -13,6 +13,7 @@
 
 package com.bmwcarit.barefoot.matcher;
 
+import com.esri.core.geometry.Point;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -147,6 +148,11 @@ public class MatcherKState extends KState<MatcherCandidate, MatcherTransition, M
             for (MatcherCandidate candidate : this.sequence()) {
                 JSONObject jsoncandidate = candidate.point().toJSON();
                 if (candidate.transition() != null) {
+                    Polyline line = candidate.transition().route().geometry();
+                    Point end = line.getPoint(line.getPointCount() - 1);
+                    Point start = line.getPoint(0);
+                    jsoncandidate.put("route_st", start.getY() + " " + start.getX());
+                    jsoncandidate.put("route_end", end.getY() + " " + end.getX());
                     jsoncandidate.put("route",
                             GeometryEngine.geometryToWkt(candidate.transition().route().geometry(),
                                     WktExportFlags.wktExportLineString));
